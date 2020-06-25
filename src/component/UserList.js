@@ -1,6 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 function User({user, onRemove, onToggle}) {
+    // deps : 의존값이 들어있는 배열
+    // 만약 deps 배열을 비우게 된다면 컴포넌트가 처음 나타날때에만
+    // useEffect에 등록한 함수가 호출됨
+    // useEffect에서는 함수를 반환 할 수 있는데 cleanup 함수라고 부름.
+    useEffect(() => {
+        console.log('user 값이 설정됨');
+        console.log(user);
+        return () => {
+            console.log('user 가 바뀌기 전..');
+            console.log(user);
+        };
+    }, [user]);
     return (
         <div>
             <b
@@ -29,7 +41,6 @@ function UserList({ users, onRemove, onToggle }) {
                     onRemove={onRemove}
                     onToggle={onToggle}
                 />
-                // 각 고유 원소에 key가 있어야만 배열이 업데이트 될 때 효율적으로 렌더링 된다.
             ))}
         </div>
     );
