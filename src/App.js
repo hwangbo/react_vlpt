@@ -50,6 +50,12 @@ function App() {
         nextId.current += 1;
     };
 
+    const onRemove = id => {
+        // user.id가 파라미터로 일치하지 않는 원소만 추출해 새로운 배열을 만듦.
+        // user.id가 id 인 것을 제거한다는 의미.
+        setUsers(users.filter(user => user.id !== id));
+    };
+
     return (
         <div className="App">
             <CreateUser
@@ -58,7 +64,7 @@ function App() {
                 onChange={onChange}
                 onCreate={onCreate}
             />
-            <UserList users={users}/>
+            <UserList users={users} onRemove={onRemove}/>
         </div>
     );
 }
